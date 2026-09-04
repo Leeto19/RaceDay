@@ -1,0 +1,20 @@
+name: Validate RaceDay
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required documentation
+        run: |
+          test -d docs
+          test -f "docs/PROG Part 1.sql"
+          test -f "docs/README.txt"
+          find docs -type f -iname "*.pdf" | grep -q .
